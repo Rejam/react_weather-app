@@ -1,12 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { submit_search } from '../actions/'
 
 class Searchbar extends React.Component {
 
   onSubmitSearch = e => {
     e.preventDefault()
-    //this.props.submitSearch(userInput)
-    console.log(e.target.elements.search.value)
+    const { value: userInput } = e.target.elements.search
+    // TODO: validate input
+
+    this.props.submit_search(userInput)
     e.target.elements.search.value = ""
   }
 
@@ -27,4 +30,4 @@ class Searchbar extends React.Component {
   }
 }
 
-export default connect()(Searchbar)
+export default connect(null, { submit_search })(Searchbar)
