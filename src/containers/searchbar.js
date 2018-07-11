@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { submit_search } from '../actions/'
+import { fetch_weather } from '../actions/'
 
 class Searchbar extends React.Component {
 
@@ -9,7 +9,7 @@ class Searchbar extends React.Component {
     const { value: userInput } = e.target.elements.search
     // TODO: validate input
 
-    this.props.submit_search(userInput)
+    this.props.fetch_weather(userInput)
     e.target.elements.search.value = ""
   }
 
@@ -30,4 +30,4 @@ class Searchbar extends React.Component {
   }
 }
 
-export default connect(null, { submit_search })(Searchbar)
+export default connect(null, { fetch_weather })(Searchbar)
