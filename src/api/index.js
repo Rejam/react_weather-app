@@ -1,9 +1,11 @@
 import axios from 'axios'
 import { API_KEY } from './config'
 
-const rootUrl = `https://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}`
+const ROOT = `https://api.openweathermap.org/data/2.5/forecast`
+const UNIT = "units=metric"
+const PARTIAL = `${ROOT}?appid=${API_KEY}&${UNIT}`
 
 export default function(city) {
-  const url = `${rootUrl}&q=${city},gb`
+  const url = `${PARTIAL}&q=${city},gb`
   return axios.get(url)
 }
