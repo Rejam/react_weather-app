@@ -1,11 +1,9 @@
 import { FETCH_WEATHER } from './types'
-import api from '../api'
+import weatherApi from '../api'
 
-const fetch_weather = city => {
-  return {
-    type: FETCH_WEATHER,
-    payload: api(city)
-  }
-}
+const fetch_weather = city => ({
+  type: FETCH_WEATHER,
+  payload: weatherApi(city)
+})
 
 export { fetch_weather }

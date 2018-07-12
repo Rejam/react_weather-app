@@ -8,7 +8,6 @@ class Searchbar extends React.Component {
     e.preventDefault()
     const { value: userInput } = e.target.elements.search
     // TODO: validate input
-
     this.props.fetch_weather(userInput)
     e.target.elements.search.value = ""
   }

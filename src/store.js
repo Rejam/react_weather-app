@@ -2,16 +2,12 @@ import { createStore, applyMiddleware } from 'redux'
 import reduxPromise from 'redux-promise'
 import reducer from './reducers'
 
-
-const logger = () => {
-  return next => action => {
-    console.log("logged", action)
-  }
+const logger = () => next => action => {
+  console.log("logged:", action)
+  return next(action)
 }
 
-const middleware = [logger, reduxPromise, logger]
+const middleware = [logger, reduxPromise]
 const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);
-
-
 
 export default createStoreWithMiddleware(reducer)
