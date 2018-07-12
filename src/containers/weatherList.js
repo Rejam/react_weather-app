@@ -1,14 +1,41 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import City from '../components/city'
+import Chart from '../components/chart'
 
-class WeatherResults extends React.Component {
+class WeatherList extends React.Component {
+
+  extractData = data =>
+    data.list.reduce((acc, weather) => {
+      const { temp, humidity, pressure } = weather.main
+      return {
+        temp:   [...acc.temp, temp],
+        humid:  [...acc.humid, humidity],
+        press:  [...acc.press, pressure],
+      }
+    }, {temp: [], humid: [], press: []})
+
+  renderWeather = cityData => {
+    const { name } = cityData.city
+    const cityData = this.extractData(cityData)
+
+    return (
+      <tr key={ cityData.id }>
+        <td>{ name }</td>
+        <td>
+          <Chart data={ cityData.temp } color="orange" />
+        </td>
+        <td>
+          <Chart data={ cityData.humid } color="blue" />
+        </td>
+        <td>
+          <Chart data={ cityData.press } color="red" /> 
+        </td>
+      </tr>
+    )
+  }
 
   render() {
-    const Cities = ({ weather }) => 
-      !weather ? null : weather.map( data =>
-        <City key={data.id} data={ data } />
-      )
+    const WeatherChartsForEachCity = () => this.props.weather.map(this.renderWeather)
 
     return (
       <table className="table table-hover">
@@ -21,7 +48,7 @@ class WeatherResults extends React.Component {
           </tr>
         </thead>
           <tbody>
-            <Cities weather={ this.props.weather } />
+            <WeatherChartsForEachCity />
           </tbody>
       </table>
     )
@@ -32,4 +59,4 @@ const mapStateToProps = ({ weather }) => ({
   weather
 })
 
-export default connect(mapStateToProps)(WeatherResults)
+export default connect(mapStateToProps)(WeatherList)
