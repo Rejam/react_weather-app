@@ -6,6 +6,6 @@ const UNIT = "units=metric"
 const PARTIAL = `${ROOT}?appid=${API_KEY}&${UNIT}`
 
 export default function(city) {
-  const url = `${PARTIAL}&q=${city},gb`
+  const url = `${PARTIAL}&q=${city}`
   return axios.get(url)
 }

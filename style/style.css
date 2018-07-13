@@ -10,3 +10,8 @@ tbody tr:nth-of-type(odd) {
 svg {
   height: 120px;
 }
+
+.map {
+  height: 150px;
+  width: 200px;
+}
